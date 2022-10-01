@@ -1,7 +1,4 @@
-use crate::types::{StyleName, Styles, MAX_PARENT_STYLES};
 use sp_runtime::codec::{Decode, Encode};
-use sp_runtime::BoundedVec;
-use std::error::Error;
 
 pub mod types;
 
@@ -14,22 +11,20 @@ pub trait MusicStylesProvider {
     /// Get the full register containing styles and sub-styles.
     fn styles() -> Self::Styles;
     /// Get all the parent_styles contained in the register.
-    fn parent_styles() -> BoundedVec<Self::StyleName, MAX_PARENT_STYLES>;
-    fn exist_from<T: TryInto<StyleName>>(data: T) -> Option<Self::StyleName> {
-        let styles = Self::styles();
-        let bounded_data = data.try_into().map_err(|_| None)?;
+    fn parent_styles() -> Vec<Self::StyleName>;
+    /// Verify that the given style name exist.
+    fn exist(style_name: &Self::StyleName) -> bool;
+    /// Convert the given value into a style name and check if it exist, returning None if not.
+    /// Throw an Error if the value can't be converted.
+    fn exist_from<T: TryInto<Self::StyleName>>(
+        data: T,
+    ) -> Result<Option<Self::StyleName>, T::Error> {
+        let style_name = data.try_into()?;
 
-        // checking in parent styles
-        if styles.contains_key(data) {
-            return true;
+        if Self::exist(&style_name) {
+            Ok(Some(style_name))
+        } else {
+            Ok(None)
         }
-        // checking in sub styles
-        for style in styles.values() {
-            if style.contains(data) {
-                return true;
-            }
-        }
-
-        false
     }
 }
