@@ -1,8 +1,8 @@
-use sp_runtime::codec::{Decode, Encode};
+use sp_runtime::DispatchResult;
 
 pub mod types;
 
-pub trait MusicStylesProvider {
+pub trait InspectMusicStyles {
     /// Type of a style name.
     type StyleName;
     /// Type of a register containing all the styles.
@@ -33,4 +33,17 @@ pub trait MusicStylesProvider {
             Ok(None)
         }
     }
+}
+
+pub trait MutateMusicStyles {
+    /// Type of a style name.
+    type StyleName;
+
+    /// Add a parent style into the database.
+    fn add_parent_style(style_name: Self::StyleName) -> DispatchResult;
+    /// Add a sub-style into the database.
+    fn add_sub_style(
+        sub_style_name: Self::StyleName,
+        parent_style: Self::StyleName,
+    ) -> DispatchResult;
 }
