@@ -1,5 +1,6 @@
 use sp_runtime::codec::MaxEncodedLen;
 use sp_runtime::DispatchResult;
+use sp_std::prelude::*;
 
 pub trait InspectMusicStyles {
     /// Type of a style name.
