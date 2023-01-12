@@ -1,13 +1,12 @@
 use sp_runtime::codec::{Decode, Encode, MaxEncodedLen};
 use sp_runtime::scale_info::TypeInfo;
-use std::fmt::Debug;
 
 pub mod artist;
 
 #[cfg(feature = "std")]
 /// Something defined as an Actor on the network.
 pub trait Actor:
-    Clone + Encode + Decode + Eq + PartialEq + Debug + MaxEncodedLen + TypeInfo
+    Clone + Encode + Decode + Eq + PartialEq + std::fmt::Debug + MaxEncodedLen + TypeInfo
 {
 }
 
