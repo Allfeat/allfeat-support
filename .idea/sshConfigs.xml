@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="OPEN_SSH" host="164.90.224.24" id="71d6d2da-c927-433e-8432-223b70351288" port="22" customName="symphonie-01" nameFormat="CUSTOM" username="root" useOpenSSHConfig="true">
+        <option name="customName" value="symphonie-01" />
+      </sshConfig>
+    </configs>
+  </component>
+</project>
