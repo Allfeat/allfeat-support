@@ -1,4 +1,4 @@
-pub use frame_support::traits::fungibles::{Inspect, InspectMetadata, Mutate};
+pub use frame_support::traits::fungibles::{Inspect, Mutate};
 use sp_runtime::DispatchResult;
 
 /// Trait for providing the ability to create new Allfeat fungible assets.
